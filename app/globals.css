@@ -1,0 +1,98 @@
+@import url("https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --ink: #0b0610;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--ink);
+}
+
+body {
+  @apply bg-ink text-paper antialiased font-sans;
+  overflow-x: hidden;
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+::selection {
+  background: #ff5da2;
+  color: #0b0610;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---- utilities ---- */
+
+/* fluid display headline */
+.text-display {
+  font-family: "Clash Display", var(--font-sans), sans-serif;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+}
+
+/* brand gradient text */
+.text-aurora {
+  background: linear-gradient(100deg, #a855f7 0%, #ff5da2 55%, #f5b8ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* subtle film grain overlay */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* hairline border helper */
+.hairline {
+  border-color: rgba(245, 240, 250, 0.1);
+}
+
+/* dual marquees */
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+.animate-marquee-left { animation: marquee-left 38s linear infinite; }
+.animate-marquee-right { animation: marquee-right 38s linear infinite; }
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
